@@ -1,0 +1,17 @@
+{
+    "logs": {
+        "logs_collected": {
+            "files": {
+                "collect_list": [{
+                    "file_path": "/var/log/tomcat8/catalina.out",
+                    "log_group_name": "/sys/monitor-api",
+                    "log_stream_name": "{hostname} - {instance_id} - {ip_address} - monitor-api catalina"
+                },{
+                    "file_path": "/var/log/monitor-api-gc.log",
+                    "log_group_name": "/sys/monitor-api",
+                    "log_stream_name": "{hostname} - {instance_id} - {ip_address} - monitor-api gc"
+                }]
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+version: 0.2
+
+#env:
+  #variables:
+     # key: "value"
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto8
+  #pre_build:
+    #commands:
+      # - command
+      # - command
+  build:
+    commands:
+      - mvn clean package -Dmaven.test.skip=true
+  post_build:
+    commands:
+      - ls -l target/
+      - mkdir -p ./deploy
+      - cp target/*.war.war ./deploy/ROOT.war
+      - cp scripts/* ./deploy
+      - cp appspec.yml ./deploy/appspec.yml
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: deploy
+cache:
+  paths:
+    - '/root/.m2/**/*'

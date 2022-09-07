@@ -1,0 +1,35 @@
+version: 0.0
+os: linux
+files:
+  - source: ROOT.war
+    destination: /home/ubuntu/tomcat8/webapps  
+  - source: setenv.sh
+    destination: /home/ubuntu/tomcat8/bin
+  - source: server.xml
+    destination: /home/ubuntu/tomcat8/conf
+  - source: app.conf.json
+    destination: /home/ubuntu
+permissions:
+  - object: /usr/share/tomcat8/bin
+    pattern: "setenv.sh"
+    mode: 755
+    type:
+      - file
+hooks:
+  #ApplicationStop:
+  BeforeInstall:
+    - location: stop_application.sh
+      timeout: 300
+      runas: ubuntu
+    - location: install_dependencies.sh
+      timeout: 300
+      runas: ubuntu
+  AfterInstall:
+    - location: after_install.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStart:
+    - location: start_application.sh
+      timeout: 300
+  #ValidateService:
+    #- location: basic_health_check.sh
